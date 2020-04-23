@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "collegues-front"
+    }
+  },
+  "defaultProject": "collegues-front",
+  "cli": {
+    "analytics": false
+  }
 }
