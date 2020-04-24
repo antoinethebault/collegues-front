@@ -9,4 +9,10 @@ import {Collegues} from './mock/collegues.mock';
 export class AppComponent {
   title = 'collegues-front';
   collegue1 = Collegues.collegue1;
+  collegue2 = Collegues.collegue2;
+  collegue3 = Collegues.collegue3;
+
+  creer(){
+    console.log("Création d'un nouveau collègue");
+  }
 }
