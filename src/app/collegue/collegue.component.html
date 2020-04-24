@@ -1,5 +1,6 @@
 
 <html>
+    <div class="offset-1 offset-sm-1 offset-md-1 offset-lg-1 col-6 col-sm-6 col-md-6 col-lg-6">
     <table>
         <tbody>
             <tr>
@@ -16,7 +17,7 @@
             </tr>
             <tr>
                 <td>Date de naissance : </td>
-                <td>{{collegue.dateDeNaissance}}</td>
+                <td>{{collegue.dateDeNaissance.toLocaleDateString()}}</td>
             </tr>
             <tr>
                 <td>Email : </td>
@@ -24,4 +25,10 @@
             </tr>
         </tbody>
     </table>
+    <br/>
+    <button type="button" class="btn btn-primary" (click)="modifier()">Modifier</button>
+    <br/><br/>
+    <a href="#onclick=creer()">Créer un nouveau collègue</a>
+    <br/>
+    </div>
 </html>

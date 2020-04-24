@@ -15,4 +15,8 @@ export class CollegueComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  modifier(){
+    console.log("Modification du collègue");
+  }
+
 }
