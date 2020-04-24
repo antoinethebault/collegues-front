@@ -1,9 +1,19 @@
 <html>
-  <br>
-  <ngb-alert type="success">Collegues</ngb-alert>
-  <app-collegue [collegue]="collegue1"></app-collegue>
-  <app-collegue [collegue]="collegue2"></app-collegue>
-  <app-collegue [collegue]="collegue3"></app-collegue>
-  <a href="#" (click)="creer()">Créer un nouveau collègue</a>
+<br>
+<ngb-alert type="success">Administration Collegues</ngb-alert>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
+    </div>
+    <div class="col-8">
+      <app-collegue [collegue]="collegue1"></app-collegue>
+      <app-collegue [collegue]="collegue2"></app-collegue>
+      <app-collegue [collegue]="collegue3"></app-collegue>
+      <a href="#" (click)="creer()">Créer un nouveau collègue</a>
+    </div>
+  </div>
   <br />
+</div>
+
 </html>
