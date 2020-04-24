@@ -12,3 +12,9 @@ td{
 tr{
     margin: 5px;
 }
+.cardModel{
+    border: 1px solid grey;
+    margin: 5px;
+    border-radius: 5px;
+    
+}

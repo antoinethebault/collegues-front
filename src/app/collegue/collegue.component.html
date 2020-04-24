@@ -1,5 +1,6 @@
 <html>
-<img src="../assets/photo.png" alt="photo" />
+    <div class="cardModel">
+<img [src]="cheminImage" alt="photo" />
 <div class="offset-1 offset-sm-1 offset-md-1 offset-lg-1 col-12 col-sm-12 col-md-7 col-lg-6">
     <table>
         <tbody>
@@ -9,7 +10,7 @@
             </tr>
             <tr>
                 <td>Nom : </td>
-                <td>{{collegue.nom}}</td>
+                <td>{{collegue.nom | uppercase}}</td>
             </tr>
             <tr>
                 <td>Prénoms : </td>
@@ -18,7 +19,7 @@
             <div *ngIf="affichage; else elseBlock2">
                 <tr>
                     <td> Date de naissance : </td>
-                    <td>{{collegue.dateDeNaissance.toLocaleDateString()}}</td>
+                    <td>{{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}</td>
                 </tr>
                 <tr>
                     <td>Email : </td>
@@ -28,7 +29,7 @@
             <ng-template #elseBlock2>
                 <tr>
                     <td><label for="dateDeNaissance">Date de naissance : </label></td>
-                    <td><input type="date" name="dateDeNaissance" id="dateDeNaissance" value="{{collegue.dateDeNaissance.toLocaleDateString()}}"/></td>
+                    <td><input type="date" name="dateDeNaissance" id="dateDeNaissance" value="{{collegue.dateDeNaissance.toISOString().substring(0,10)}}"/></td>
                 </tr>
                 <tr>
                     <td><label for="email">Email : </label></td>
@@ -45,6 +46,7 @@
             <button type="button" class="btn btn-primary" (click)="valider()">Valider</button>
         </ng-template>
     <br /><br />
+</div>
 </div>
 
 </html>
