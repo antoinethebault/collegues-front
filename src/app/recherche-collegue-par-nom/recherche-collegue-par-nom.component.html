@@ -1,13 +1,11 @@
 <html>
 
 <body>
-    <form>
         <label for="recherche">Recherche par nom</label>
         <input type="text" id="recherche" name="recherche" />
         <input type="submit" value="Rechercher" (click)="recherche()"/>
-    </form>
-    <ul id="liste">
-        
+    <ul>
+        <li *ngFor="let matricule of listeMatricules">{{matricule}}</li>
     </ul>
 </body>
 
