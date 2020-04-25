@@ -10,7 +10,7 @@ export class CollegueComponent implements OnInit {
 
   @Input() collegue:Collegue;
   affichage:boolean;
-  cheminImage:string = "../assets/photo.png";
+  cheminImage:string = "https://zupimages.net/up/20/17/2d4s.png"; //"../assets/photo.png";
 
   constructor() { }
 
