@@ -17,6 +17,9 @@ export class RechercheCollegueParNomComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //fonction appelee si on clique sur le bouton recherche
+  //elle aliment la liste des matricules dont le nom correspond
+  //la liste est affichee via des *ngFor
   recherche(){
     this.listeMatricules = [];
     const nom = (<HTMLInputElement>document.getElementById("recherche")).value;
