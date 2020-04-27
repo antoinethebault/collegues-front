@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Collegues } from '../mock/collegues.mock';
 import { Collegue } from '../models/Collegue';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-recherche-collegue-par-nom',
@@ -12,7 +13,7 @@ export class RechercheCollegueParNomComponent implements OnInit {
   listeMatricules:string[] = [];
   collegues:Collegue[] = Collegues.collegues;
 
-  constructor() { }
+  constructor(private _srv:DataService) { }
 
   ngOnInit(): void {
   }
@@ -23,11 +24,7 @@ export class RechercheCollegueParNomComponent implements OnInit {
   recherche(){
     this.listeMatricules = [];
     const nom = (<HTMLInputElement>document.getElementById("recherche")).value;
-    this.collegues.forEach(collegue => {
-      if (collegue.nom == nom){
-        this.listeMatricules.push(collegue.matricule);
-      }
-    });
+    this.listeMatricules = this._srv.rechercherParNom(nom);
   }
 
 }

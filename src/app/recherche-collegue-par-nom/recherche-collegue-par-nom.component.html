@@ -2,8 +2,8 @@
 
 <body>
         <label for="recherche">Recherche par nom</label>
-        <input type="text" id="recherche" name="recherche" />
-        <input type="submit" value="Rechercher" (click)="recherche()"/>
+        <input class="form-control" type="text" id="recherche" name="recherche" />
+        <input class="btn btn-primary" type="submit" value="Rechercher" (click)="recherche()"/>
     <ul>
         <li *ngFor="let matricule of listeMatricules">{{matricule}}</li>
     </ul>
