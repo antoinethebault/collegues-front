@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 
   // ajout d'une URL backend en mode développement
-  backendUrl: 'https://digicapi.herokuapp.com/'
+  backendUrl: 'http://localhost:8080/'
 };
 
 /*
