@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {Collegue} from '../models/Collegue';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-collegue',
@@ -12,10 +13,12 @@ export class CollegueComponent implements OnInit {
   affichage:boolean;
   cheminImage:string = "https://zupimages.net/up/20/17/2d4s.png"; //"../assets/photo.png";
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
   ngOnInit(): void {
     this.affichage = true;
+    this.dataService.abonnementCollegueEnCours()
+    .subscribe(collegueSelect => this.collegue = collegueSelect)
   }
 
   modifier(){

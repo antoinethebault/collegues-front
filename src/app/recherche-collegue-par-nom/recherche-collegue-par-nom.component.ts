@@ -27,4 +27,8 @@ export class RechercheCollegueParNomComponent implements OnInit {
     this.listeMatricules = this._srv.rechercherParNom(nom);
   }
 
+  activeCollegue(matricule:string){
+    this._srv.recupererCollegueMatricule(matricule);
+  }
+
 }

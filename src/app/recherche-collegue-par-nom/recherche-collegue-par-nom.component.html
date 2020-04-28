@@ -5,7 +5,7 @@
         <input class="form-control" type="text" id="recherche" name="recherche" />
         <input class="btn btn-primary" type="submit" value="Rechercher" (click)="recherche()"/>
     <ul>
-        <li *ngFor="let matricule of listeMatricules">{{matricule}}</li>
+        <li *ngFor="let matricule of listeMatricules" (click)="activeCollegue(matricule)">{{matricule}}</li>
     </ul>
 </body>
 
