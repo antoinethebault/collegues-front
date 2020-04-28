@@ -1,52 +1,118 @@
 <html>
-    <div class="cardModel">
-<img [src]="cheminImage" alt="photo" />
-<div class="offset-1 offset-sm-1 offset-md-1 offset-lg-1 col-11 col-sm-11 col-md-11 col-lg-11">
-    <table class="table">
-        <tbody>
-            <tr>
-                <td>Matricule : </td>
-                <td>{{collegue.matricule}}</td>
-            </tr>
-            <tr>
-                <td>Nom : </td>
-                <td>{{collegue.nom | uppercase}}</td>
-            </tr>
-            <tr>
-                <td>Prénoms : </td>
-                <td>{{collegue.prenoms}}</td>
-            </tr>
-            <div *ngIf="affichage; else elseBlock2">
-                <tr>
-                    <td> Date de naissance : </td>
-                    <td>{{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}</td>
-                </tr>
-                <tr>
-                    <td>Email : </td>
-                    <td>{{collegue.email}}</td>
-                </tr>
-            </div>
-            <ng-template #elseBlock2>
-                <tr>
-                    <td><label for="dateDeNaissance">Date de naissance : </label></td>
-                    <td><input type="date" name="dateDeNaissance" id="dateDeNaissance" value="{{collegue.dateDeNaissance.toISOString().substring(0,10)}}"/></td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email : </label></td>
-                    <td><input type="text" name="email" id="email" value="{{collegue.email}}"/></td>
-                </tr>
-            </ng-template>
-        </tbody>
-    </table>
-    <br />
-        <div *ngIf="affichage; else elseBlock">
+<div class="cardModel">
+
+    <div class="offset-1 offset-sm-1 offset-md-1 offset-lg-1 col-11 col-sm-11 col-md-11 col-lg-11">
+        <div *ngIf="affichage">
+            <img [src]="cheminImage" alt="photo" />
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Matricule : </td>
+                        <td>{{collegue.matricule}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nom : </td>
+                        <td>{{collegue.nom | uppercase}}</td>
+                    </tr>
+                    <tr>
+                        <td>Prénoms : </td>
+                        <td>{{collegue.prenoms}}</td>
+                    </tr>
+                    <tr>
+                        <td> Date de naissance : </td>
+                        <td>{{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email : </td>
+                        <td>{{collegue.email}}</td>
+                    </tr>
+                </tbody>
+            </table>
             <button type="button" class="btn btn-primary" (click)="modifier()">Modifier</button>
+            <br /><br />
+            <a href="#" (click)="creer()">Créer un nouveau collègue</a>
         </div>
-        <ng-template #elseBlock>
+        <div *ngIf="modification">
+            <img [src]="cheminImage" alt="photo" />
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Matricule : </td>
+                        <td>{{collegue.matricule}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nom : </td>
+                        <td>{{collegue.nom | uppercase}}</td>
+                    </tr>
+                    <tr>
+                        <td>Prénoms : </td>
+                        <td>{{collegue.prenoms}}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="dateDeNaissance">Date de naissance : </label></td>
+                        <td><input type="date" name="dateDeNaissance" id="dateDeNaissance"
+                                value="{{collegue.dateDeNaissance.toISOString().substring(0,10)}}" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email : </label></td>
+                        <td><input type="text" name="email" id="email" value="{{collegue.email}}" /></td>
+                    </tr>
+                </tbody>
+            </table>
             <button type="button" class="btn btn-primary" (click)="valider()">Valider</button>
-        </ng-template>
-    <br/><br />
-</div>
+        </div>
+        <div *ngIf="creation">
+            <form method="POST" action="{{urlPost}}">
+                <div class="form-group row">
+                    <label for="nom" class="col-6 col-form-label">Nom : </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" #nom #etatNom="ngModel" [(ngModel)]="collegueSaisi.nom" required />
+                        <div *ngIf="etatNom.invalid && etatNom.dirty">
+                            Le champ doit être rempli
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="prenoms" class="col-6 col-form-label">Prénom : </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="prenoms" id="prenoms" placeholder="Prenom" #prenoms #etatPrenoms="ngModel" [(ngModel)]="collegueSaisi.prenoms" required>
+                        <div *ngIf="etatPrenoms.invalid && etatPrenoms.dirty">
+                            Le champ doit être rempli
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="dateDeNaissance" class="col-6 col-form-label">Date de naissance : </label>
+                    <div class="col-6">
+                        <input type="date" class="form-control" name="dateDeNaissance" id="dateDeNaissance" #dateDeNaissance #etatDateDeNaissance="ngModel" [(ngModel)]="collegueSaisi.dateDeNaissance" required>
+                        <div *ngIf="etatDateDeNaissance.invalid && etatDateDeNaissance.dirty">
+                            Le champ doit être rempli
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-6 col-form-label">Email : </label>
+                    <div class="col-6">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="email@email.com" #email #etatEmail="ngModel" [(ngModel)]="collegueSaisi.email" required>
+                        <div *ngIf="etatEmail.invalid && etatEmail.dirty">
+                            Le champ doit être rempli
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="photoUrl" class="col-6 col-form-label">Photo URL : </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="photoUrl" id="photoUrl" placeholder="Photo URL" #photoUrl #etatPhotoUrl="ngModel" [(ngModel)]="collegueSaisi.photoUrl" required minlength="7">
+                        <div *ngIf="etatPhotoUrl.invalid && etatPhotoUrl.dirty">
+                            Le champ doit contenir au moins 7 caractères
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary  mb-2" (click)="retourCreation()">Retour</button>
+                <input type="submit" class="btn btn-primary ml-2 mb-2" (click)="validerCreation(nom.value, prenoms.value, dateDeNaissance.value, email.value)" value="Valider" />
+            </form>
+        </div>
+    </div>
 </div>
 
 </html>

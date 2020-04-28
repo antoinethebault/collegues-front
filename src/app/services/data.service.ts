@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { matricules } from '../mock/matricules.mock';
 import { Collegues } from '../mock/collegues.mock';
 import { Collegue } from '../models/Collegue';
+import { CollegueDto } from '../models/CollegueDto';
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 //import {AppComponent} from '../app.component';
@@ -17,7 +18,7 @@ export class DataService {
 
   listeMatricules: string[];
   collegues: Collegue[];
-  URL_BACKEND = environment.backendUrl;
+  public URL_BACKEND = environment.backendUrl;
   private collegueEnCours = new Subject<Collegue>();
   cacheCollegues = {};
 
@@ -25,7 +26,7 @@ export class DataService {
   rechercherParNom(nom: string): string[] {
     this.cacheCollegues = {};
     this.listeMatricules = [];
-    
+
     this._http.get(this.URL_BACKEND + "collegues?nom=" + nom).subscribe((data: string[]) => {
       for (let i = 0; i < data.length; i++) {
         this.listeMatricules.push(data[i]);
@@ -56,6 +57,14 @@ export class DataService {
 
   abonnementCollegueEnCours(): Observable<Collegue> {
     return this.collegueEnCours.asObservable();
+  }
+
+  creationCollegue(collegue:CollegueDto){
+    this._http.post<Collegue>(this.URL_BACKEND + "collegues" , collegue).subscribe((data:Collegue)=> {
+      this.collegueEnCours.next(data);
+    }, (error:any) => {
+      console.log(error);
+    });
   }
 
 }

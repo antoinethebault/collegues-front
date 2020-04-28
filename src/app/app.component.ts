@@ -18,10 +18,6 @@ export class AppComponent {
   //collegue2 = Collegues.collegues[1];
   //collegue3 = Collegues.collegues[2];
 
-  creer(){
-    console.log("Création d'un nouveau collègue");
-  }
-
   afficherCollegue(collegue:Collegue){
     this.collegue=collegue;
   }
