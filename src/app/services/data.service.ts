@@ -69,15 +69,10 @@ export class DataService {
   }
 
   modificationCollegue(collegueSaisi:CollegueModifDTO, collegue:Collegue){
-    this._http.patch<string>(this.URL_BACKEND + "collegues/"+collegue.matricule , collegueSaisi).subscribe((data:string)=> {
-      collegue.email = collegueSaisi.email;
-      collegue.photoUrl = collegueSaisi.photoUrl;
-      this.collegueEnCours.next(collegue);
+    this._http.patch<Collegue>(this.URL_BACKEND + "collegues/"+collegue.matricule , collegueSaisi).subscribe((data:Collegue)=> {
+      this.collegueEnCours.next(data);
     }, (error:any) => {
       console.log(error);
-      collegue.email = collegueSaisi.email;
-      collegue.photoUrl = collegueSaisi.photoUrl;
-      this.collegueEnCours.next(collegue);
     });
   }
 
