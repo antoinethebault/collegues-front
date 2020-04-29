@@ -5,8 +5,8 @@ import { Collegue } from '../models/Collegue';
 import { CollegueDto } from '../models/CollegueDto';
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { environment } from '../../environments/environment';
-//import {AppComponent} from '../app.component';
 import { Observable, interval, Subject } from 'rxjs';
+import { CollegueModifDTO } from '../models/CollegueModifDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,7 @@ export class DataService {
   collegues: Collegue[];
   public URL_BACKEND = environment.backendUrl;
   private collegueEnCours = new Subject<Collegue>();
+  private info = new Subject<string>();
   cacheCollegues = {};
 
   //retourne la liste des matricules correspondant au nom recherche
@@ -64,6 +65,19 @@ export class DataService {
       this.collegueEnCours.next(data);
     }, (error:any) => {
       console.log(error);
+    });
+  }
+
+  modificationCollegue(collegueSaisi:CollegueModifDTO, collegue:Collegue){
+    this._http.patch<string>(this.URL_BACKEND + "collegues/"+collegue.matricule , collegueSaisi).subscribe((data:string)=> {
+      collegue.email = collegueSaisi.email;
+      collegue.photoUrl = collegueSaisi.photoUrl;
+      this.collegueEnCours.next(collegue);
+    }, (error:any) => {
+      console.log(error);
+      collegue.email = collegueSaisi.email;
+      collegue.photoUrl = collegueSaisi.photoUrl;
+      this.collegueEnCours.next(collegue);
     });
   }
 

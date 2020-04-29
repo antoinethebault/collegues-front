@@ -50,23 +50,33 @@
                     </tr>
                     <tr>
                         <td><label for="dateDeNaissance">Date de naissance : </label></td>
-                        <td><input type="date" name="dateDeNaissance" id="dateDeNaissance"
-                                value="{{collegue.dateDeNaissance.toISOString().substring(0,10)}}" /></td>
+                        <td>{{collegue.dateDeNaissance | date:'dd/MM/yyyy'}}</td>
                     </tr>
                     <tr>
                         <td><label for="email">Email : </label></td>
-                        <td><input type="text" name="email" id="email" value="{{collegue.email}}" /></td>
+                        <td><input type="text" name="email" id="email" value="{{collegue.email}}" #etatEmailModif="ngModel" [(ngModel)]="collegueModifSaisi.email" required/></td>
+                    </tr>
+                    <tr *ngIf="etatEmailModif.invalid && (erreur || etatEmailModif.dirty)">
+                        Le champ doit être rempli
+                    </tr>
+                    <tr>
+                        <td><label for="photoUrl">Photo URL : </label></td>
+                        <td><input type="text" name="photoUrl" id="photoUrl" value="{{collegue.photoUrl}}" #etatPhotoUrlModif="ngModel" [(ngModel)]="collegueModifSaisi.photoUrl" required minlength="7"/></td>
+                    </tr>
+                    <tr *ngIf="etatPhotoUrlModif.invalid && (erreur || etatPhotoUrlModif.dirty)">
+                        Le champ doit avoir au moins 7 caractères
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-primary" (click)="valider()">Valider</button>
+            <button type="button" class="btn btn-primary mb-2 mr-2" (click)="retourModification()">Retour</button>
+            <button type="button" class="btn btn-primary mb-2" (click)="validerModification()">Valider</button>
         </div>
         <div *ngIf="creation">
             <form method="POST" action="{{urlPost}}">
                 <div class="form-group row">
                     <label for="nom" class="col-6 col-form-label">Nom : </label>
                     <div class="col-6">
-                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" #nom #etatNom="ngModel" [(ngModel)]="collegueSaisi.nom" required />
+                        <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" #etatNom="ngModel" [(ngModel)]="collegueSaisi.nom" required />
                         <div *ngIf="etatNom.invalid && (erreur || etatNom.dirty)">
                             Le champ doit être rempli
                         </div>
@@ -75,7 +85,7 @@
                 <div class="form-group row">
                     <label for="prenoms" class="col-6 col-form-label">Prénom : </label>
                     <div class="col-6">
-                        <input type="text" class="form-control" name="prenoms" id="prenoms" placeholder="Prenom" #prenoms #etatPrenoms="ngModel" [(ngModel)]="collegueSaisi.prenoms" required>
+                        <input type="text" class="form-control" name="prenoms" id="prenoms" placeholder="Prenom" #etatPrenoms="ngModel" [(ngModel)]="collegueSaisi.prenoms" required>
                         <div *ngIf="etatPrenoms.invalid && (erreur || etatPrenoms.dirty)">
                             Le champ doit être rempli
                         </div>
@@ -84,7 +94,7 @@
                 <div class="form-group row">
                     <label for="dateDeNaissance" class="col-6 col-form-label">Date de naissance : </label>
                     <div class="col-6">
-                        <input type="date" class="form-control" name="dateDeNaissance" id="dateDeNaissance" #dateDeNaissance #etatDateDeNaissance="ngModel" [(ngModel)]="collegueSaisi.dateDeNaissance" required >
+                        <input type="date" class="form-control" name="dateDeNaissance" id="dateDeNaissance" #etatDateDeNaissance="ngModel" [(ngModel)]="collegueSaisi.dateDeNaissance" required >
                         <div *ngIf="etatDateDeNaissance.invalid && (erreur || etatPrenoms.dirty) ">
                             Le champ doit être rempli
                         </div>
@@ -93,7 +103,7 @@
                 <div class="form-group row">
                     <label for="email" class="col-6 col-form-label">Email : </label>
                     <div class="col-6">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="email@email.com" #email #etatEmail="ngModel" [(ngModel)]="collegueSaisi.email" required>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="email@email.com" #etatEmail="ngModel" [(ngModel)]="collegueSaisi.email" required>
                         <div *ngIf="etatEmail.invalid && (erreur || etatEmail.dirty)">
                             Le champ doit être rempli
                         </div>
@@ -102,7 +112,7 @@
                 <div class="form-group row">
                     <label for="photoUrl" class="col-6 col-form-label">Photo URL : </label>
                     <div class="col-6">
-                        <input type="text" class="form-control" name="photoUrl" id="photoUrl" placeholder="Photo URL" #photoUrl #etatPhotoUrl="ngModel" [(ngModel)]="collegueSaisi.photoUrl" required minlength="7">
+                        <input type="text" class="form-control" name="photoUrl" id="photoUrl" placeholder="Photo URL" #etatPhotoUrl="ngModel" [(ngModel)]="collegueSaisi.photoUrl" required minlength="7">
                         <div *ngIf="etatPhotoUrl.invalid && (erreur || etatPhotoUrl.dirty)">
                             Le champ doit contenir au moins 7 caractères
                         </div>

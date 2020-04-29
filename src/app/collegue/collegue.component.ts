@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Collegue } from '../models/Collegue';
 import { CollegueDto } from '../models/CollegueDto';
+import { CollegueModifDTO } from '../models/CollegueModifDTO';
 import { DataService } from '../services/data.service';
 
 
@@ -17,9 +18,8 @@ export class CollegueComponent implements OnInit {
   creation: boolean;
   erreur: boolean;
   collegueSaisi: CollegueDto =  new CollegueDto ('','','','',null,'');
-  nom2: string;
+  collegueModifSaisi: CollegueModifDTO = new CollegueModifDTO('','');
   urlPost = this.dataService.URL_BACKEND+"collegues";
-  //cheminImage:string = "https://zupimages.net/up/20/17/2d4s.png"; //"../assets/photo.png";
 
   constructor(private dataService:DataService) { }
 
@@ -33,16 +33,25 @@ export class CollegueComponent implements OnInit {
   }
 
   modifier(){
+    this.reinitialiser();
     this.affichage = false;
     this.modification = true;
   }
 
-  valider(){
-    this.affichage = true;
-    this.modification = false;
+  validerModification(){
+    if (this.collegueModifSaisi.email && this.collegueModifSaisi.photoUrl.length>7){
+      this.erreur = false;
+      this.affichage = true;
+      this.modification = false;
+      console.log(this.collegueModifSaisi);
+      this.dataService.modificationCollegue(this.collegueModifSaisi, this.collegue);
+    }else{
+      this.erreur = true;
+    }
   }
 
   creer(){
+    this.reinitialiser();
     this.affichage = false;
     this.creation= true;
     console.log("Création d'un nouveau collègue");
@@ -52,6 +61,7 @@ export class CollegueComponent implements OnInit {
     //const collegueACreer = new CollegueDto(undefined, nom, prenoms, email, dateDeNaissance, "");
     console.log(this.collegueSaisi);
     if (this.collegueSaisi.dateDeNaissance && this.collegueSaisi.email && this.collegueSaisi.nom && this.collegueSaisi.photoUrl.length>7 && this.collegueSaisi.prenoms){
+      this.erreur = false;
       this.creation = false;
       this.affichage = true;
       this.dataService.creationCollegue(this.collegueSaisi);
@@ -63,6 +73,17 @@ export class CollegueComponent implements OnInit {
   retourCreation(){
     this.creation = false;
     this.affichage = true;
+    this.reinitialiser();
+  }
+
+  retourModification(){
+    this.modification = false;
+    this.affichage = true;
+    this.collegueModifSaisi = new CollegueModifDTO ('','');
+  }
+
+  reinitialiser(){
+    this.collegueSaisi =  new CollegueDto ('','','','',null,'');
   }
 
 }
