@@ -15,10 +15,11 @@ export class CollegueComponent implements OnInit {
   affichage:boolean;
   modification:boolean;
   creation: boolean;
-  collegueSaisi: CollegueDto = new CollegueDto ('','','','',new Date(),'');
+  erreur: boolean;
+  collegueSaisi: CollegueDto =  new CollegueDto ('','','','',null,'');
   nom2: string;
   urlPost = this.dataService.URL_BACKEND+"collegues";
-  cheminImage:string = "https://zupimages.net/up/20/17/2d4s.png"; //"../assets/photo.png";
+  //cheminImage:string = "https://zupimages.net/up/20/17/2d4s.png"; //"../assets/photo.png";
 
   constructor(private dataService:DataService) { }
 
@@ -27,7 +28,8 @@ export class CollegueComponent implements OnInit {
     this.modification = false;
     this.creation = false;
     this.dataService.abonnementCollegueEnCours()
-    .subscribe(collegueSelect => this.collegue = collegueSelect)
+    .subscribe(collegueSelect => this.collegue = collegueSelect);
+    this.erreur = false;
   }
 
   modifier(){
@@ -46,12 +48,17 @@ export class CollegueComponent implements OnInit {
     console.log("Création d'un nouveau collègue");
   }
 
-  validerCreation(nom:string, prenoms:string, dateDeNaissance:Date, email:string){
-    this.creation = false;
-    this.affichage = true;
-    const collegueACreer = new CollegueDto(undefined, nom, prenoms, email, dateDeNaissance, "");
-    console.log(collegueACreer);
-    this.dataService.creationCollegue(collegueACreer);
+  validerCreation(){
+    //const collegueACreer = new CollegueDto(undefined, nom, prenoms, email, dateDeNaissance, "");
+    console.log(this.collegueSaisi);
+    if (this.collegueSaisi.dateDeNaissance && this.collegueSaisi.email && this.collegueSaisi.nom && this.collegueSaisi.photoUrl.length>7 && this.collegueSaisi.prenoms){
+      this.creation = false;
+      this.affichage = true;
+      this.dataService.creationCollegue(this.collegueSaisi);
+    }else{
+      this.erreur = true;
+    }
+
   }
   retourCreation(){
     this.creation = false;
