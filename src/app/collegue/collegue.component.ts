@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Collegue } from '../models/Collegue';
-import { CollegueDto } from '../models/CollegueDto';
+import { CollegueDto } from '../models/CollegueDTO';
 import { CollegueModifDTO } from '../models/CollegueModifDTO';
 import { DataService } from '../services/data.service';
 

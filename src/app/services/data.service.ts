@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { matricules } from '../mock/matricules.mock';
 import { Collegues } from '../mock/collegues.mock';
 import { Collegue } from '../models/Collegue';
-import { CollegueDto } from '../models/CollegueDto';
+import { CollegueDto } from '../models/CollegueDTO';
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import { Observable, interval, Subject } from 'rxjs';
