@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../services/data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-accueil',
@@ -8,11 +9,16 @@ import {DataService} from '../services/data.service';
 })
 export class AccueilComponent implements OnInit {
 
-  constructor(private dataService:DataService) { }
-
   collegue = this.dataService.recupererCollegueCourant();
 
-  ngOnInit(): void {
+  constructor(private dataService:DataService, private route: ActivatedRoute) {
   }
+
+  ngOnInit(): void {
+    const matricule = this.route.snapshot.paramMap.get('matricule');
+    this.dataService.recupererCollegueMatricule(matricule);
+  }
+
+  
 
 }

@@ -1,3 +1,9 @@
 <span *ngFor="let photo of photos">
-    <a href=""><img src={{photo.photoUrl}}/></a>
+    <a (click)="chargerCollegue(photo.matricule)"><img src={{photo.photoUrl}}/></a>
 </span>
+
+
+
+<!--ref="/accueil?matricule={{photo.matricule}}"-->
+
+

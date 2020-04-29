@@ -16,7 +16,8 @@ import { AccueilComponent } from './accueil/accueil.component';
 export const ROUTES: Routes = [
   { path: 'accueil', component: AccueilComponent}, 
   { path: 'gallerie', component: GallerieComponent }, 
-  { path: 'apropos', component: AProposComponent }
+  { path: 'apropos', component: AProposComponent },
+  { path: '', component: AccueilComponent}
   ];
 
 @NgModule({
