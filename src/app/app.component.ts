@@ -18,7 +18,5 @@ export class AppComponent {
   //collegue2 = Collegues.collegues[1];
   //collegue3 = Collegues.collegues[2];
 
-  afficherCollegue(collegue:Collegue){
-    this.collegue=collegue;
-  }
+  
 }

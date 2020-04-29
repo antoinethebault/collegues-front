@@ -1,16 +1,8 @@
 <html>
 <br>
 <ngb-alert type="success">Administration Collegues</ngb-alert>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-md-4">
-      <app-recherche-collegue-par-nom></app-recherche-collegue-par-nom>
-    </div>
-    <div class="col-12 col-md-8">
-      <app-collegue [collegue]="collegue"></app-collegue>
-    </div>
-  </div>
-  <br />
-</div>
+<app-menu-component></app-menu-component>
+
+<router-outlet></router-outlet>
 
 </html>
