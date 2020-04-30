@@ -86,7 +86,7 @@ export class DataService {
   }
 
   getGallerie(){
-    this._http.get("http://digicapi.herokuapp.com/collegues/photos").subscribe((data:Gallerie[]) => {
+    this._http.get("https://digicapi.herokuapp.com/collegues/photos").subscribe((data:Gallerie[]) => {
       this.gallerieEnCours.next(data);
     }, (error: any) => {
       console.log("erreur lors du chargement de la gallerie");

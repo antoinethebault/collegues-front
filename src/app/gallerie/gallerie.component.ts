@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Gallerie } from '../models/Gallerie';
 import { Router } from '@angular/router';
+import { Collegue } from '../models/Collegue';
 
 @Component({
   selector: 'app-gallerie',
@@ -12,12 +13,15 @@ export class GallerieComponent implements OnInit {
 
   photos: Gallerie[] = [];
   afficherCollegue: boolean;
+  collegue: Collegue;
 
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.abonnementGallerieEnCours()
     .subscribe(data => this.photos = data);
+    this.dataService.abonnementCollegueEnCours()
+    .subscribe(data => this.collegue = data);
     this.dataService.getGallerie();
     this.afficherCollegue = false;
   }
@@ -26,7 +30,8 @@ export class GallerieComponent implements OnInit {
     console.log(matricule);
     this.dataService.viderCache();
     this.dataService.recupererCollegueMatricule(matricule);
-    this.router.navigate(['accueil']);
+    this.afficherCollegue = true;
+    //this.router.navigate(['accueil']);
   }
 
 }
