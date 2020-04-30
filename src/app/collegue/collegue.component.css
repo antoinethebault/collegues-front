@@ -4,6 +4,7 @@ html{
 img{
     float: left;
     margin : 5px;
+    width:150px;
 }
 td{
     width: 200px;

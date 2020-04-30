@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Gallerie } from '../models/Gallerie';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Collegue } from '../models/Collegue';
   templateUrl: './gallerie.component.html',
   styleUrls: ['./gallerie.component.css']
 })
-export class GallerieComponent implements OnInit {
+export class GallerieComponent implements OnInit, OnChanges {
 
   photos: Gallerie[] = [];
   afficherCollegue: boolean;
@@ -23,6 +23,10 @@ export class GallerieComponent implements OnInit {
     this.dataService.abonnementCollegueEnCours()
     .subscribe(data => this.collegue = data);
     this.dataService.getGallerie();
+    this.afficherCollegue = false;
+  }
+
+  ngOnChanges(): void {
     this.afficherCollegue = false;
   }
 
