@@ -65,6 +65,10 @@ export class DataService {
     return this.gallerieEnCours.asObservable();
   }
 
+  viderCache(){
+    this.cacheCollegues={};
+  }
+
   creationCollegue(collegue:CollegueDto){
     this._http.post<Collegue>(this.URL_BACKEND + "collegues" , collegue).subscribe((data:Collegue)=> {
       this.collegueEnCours.next(data);

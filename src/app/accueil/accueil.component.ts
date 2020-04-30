@@ -15,8 +15,8 @@ export class AccueilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const matricule = this.route.snapshot.paramMap.get('matricule');
-    this.dataService.recupererCollegueMatricule(matricule);
+    this.dataService.abonnementCollegueEnCours()
+    .subscribe(collegueSelect => this.collegue = collegueSelect);
   }
 
   

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class GallerieComponent implements OnInit {
 
   photos: Gallerie[] = [];
+  afficherCollegue: boolean;
 
   constructor(private dataService: DataService, private router: Router) { }
 
@@ -18,10 +19,12 @@ export class GallerieComponent implements OnInit {
     this.dataService.abonnementGallerieEnCours()
     .subscribe(data => this.photos = data);
     this.dataService.getGallerie();
+    this.afficherCollegue = false;
   }
 
   chargerCollegue(matricule:string){
     console.log(matricule);
+    this.dataService.viderCache();
     this.dataService.recupererCollegueMatricule(matricule);
     this.router.navigate(['accueil']);
   }
