@@ -34,4 +34,8 @@ export class GallerieComponent implements OnInit {
     //this.router.navigate(['accueil']);
   }
 
+  afficherGallerie(){
+    this.afficherCollegue = false;
+  }
+
 }

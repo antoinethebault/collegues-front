@@ -1,4 +1,5 @@
 <div *ngIf="afficherCollegue">
+    <button type="button" class="btn btn-primary ml-2" (click)="afficherGallerie()">Afficher la gallerie</button>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-4">
@@ -16,7 +17,3 @@
         <a (click)="chargerCollegue(photo.matricule)"><img src={{photo.photoUrl}} /></a>
     </span>
 </div>
-
-
-
-<!--ref="/accueil?matricule={{photo.matricule}}"-->
